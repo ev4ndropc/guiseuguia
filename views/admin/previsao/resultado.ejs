@@ -1,0 +1,160 @@
+<%- include("../../partials/header");  %> 
+<%- include("../../partials/navbar");  %> 
+
+<div class="container mg-top-40">
+  <form class="form-inline" method="POST" action="/admin/previsao/resultado">
+      <div class="form-group mx-sm-3 mb-2">
+        <label class="sr-only">Estado</label>
+        <input value="RJ" maxlength="2" minlength="2" name="estado" type="text" class="form-control" placeholder="Ex: RJ">
+      </div>
+
+      <div class="form-group mx-sm-3 mb-2">
+        <label class="sr-only">Cidade</label>
+        <input value="nova-friburgo" name="cidade" type="text" class="form-control" placeholder="Ex: Nova Friburgo">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+    </form>
+
+  <div class="card mg-top-20 mg-bottom-100">
+    <div class="card-header d-flex justify-content-center text-white bg-dark">
+      <h3><%= dados.cidade %></h3>
+    </div>
+    <div class="card-body flex-center-column">
+      <span class="font-weight-bold"><%= dados.data %></span>
+      <br>
+      <p><%= subtitle.subtitle %></p>
+      <div class="container flex-center container_day">
+
+        <div class="card-body flex-center-column">
+          <img src="<%= imagensDia.manha %>" alt="">
+          <span>Manhã</span>
+        </div>
+
+        <div class="card-body flex-center-column">
+          <img src="<%= imagensDia.tarde %>" alt="">
+          <span>Tarde</span>
+        </div>
+
+        <div class="card-body flex-center-column">
+          <img src="<%= imagensDia.noite %>" alt="">
+          <span>Noite</span>
+        </div>
+
+        <div class="card-body flex-center-column">
+          <div class="flex-center-column max-min">
+            <span class="text-primary"><%= temperaturasDia.maxima %> <i class="fa fa-thermometer-empty"></i></span>
+            <span class="text-danger"><%= temperaturasDia.minima %> <i class="fa fa-thermometer-empty"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row">
+        <div class="d-flex flex-column">
+          <div class="card-header flex-row align-items-center">
+            <span class="font-weight-bold">Nascer do sol:</span> <%= nascerPor.nascerDoSol %> <i class="far fa-clock"></i> (Brasília)
+          </div>
+          <div class="card-header flex-row align-items-center">
+            <span class="font-weight-bold">Pôr do sol:</span> <%= nascerPor.porDoSol %> <i class="far fa-clock"></i> (Brasília)
+          </div>
+
+        </div>
+        <div class="d-flex flex-column">
+          <div class="card-header flex-row align-items-center">
+            <span class="font-weight-bold">Probabilidade de chuva:</span> <%= ProbUv.probChuva %>% <i class="fa fa-tint text-primary"></i>
+          </div>
+          <div class="card-header flex-row align-items-center">
+            <span class="font-weight-bold">IUV máximo:</span> <%= ProbUv.maxUv %> <i class="far fa-sun text-warning"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-header d-flex justify-content-center text-white bg-dark">
+      <h3>PRÓXIMOS DIAS</h3>
+    </div>
+    <div class="card-body mg-top-20">
+      <div class="d-flex flex-row justify-content-center align-items-start">
+        <div class="col-md-2 d-flex align-items-center flex-column text-center mg-top-40">
+          <span class="font-weight-bold d-flex justify-content-center">
+            <%= proximosDias.proximo1 %>
+            <br>
+            <%= proximosDias.dia1 %>
+          </span>
+          <img src="<%= proximosDiasImg.imagem1 %>" alt="">
+          <span class="previsao-proximos-dias"><%= figcaption.figcaption1 %></span>
+          <div class=tempFooter>
+            <span class="text-primary h5"><%= temperaturaNext.min1 %> <i class="fa fa-thermometer-empty"></i></span>
+            <span class="text-danger h5"><%= temperaturaNext.max1 %> <i class="fa fa-thermometer-empty"></i></span>
+          </div>
+        </div>
+        <div class="col-md-2 d-flex align-items-center flex-column text-center mg-top-40">
+          <span class="font-weight-bold d-flex justify-content-center">
+              <%= proximosDias.proximo2 %>
+              <br>
+              <%= proximosDias.dia2 %>
+          </span>
+          <img src="<%= proximosDiasImg.imagem2 %>" alt="">
+          <span class="previsao-proximos-dias"><%= figcaption.figcaption2 %></span>
+          <div class=tempFooter>
+            <span class="text-primary h5"><%= temperaturaNext.min2 %> <i class="fa fa-thermometer-empty"></i></span>
+            <span class="text-danger h5"><%= temperaturaNext.max2 %> <i class="fa fa-thermometer-empty"></i></span>
+          </div>
+        </div>
+        <div class="col-md-2 d-flex align-items-center flex-column text-center mg-top-40">
+          <span class="font-weight-bold d-flex justify-content-center">
+              <%= proximosDias.proximo3 %>
+              <br>
+              <%= proximosDias.dia3 %>
+          </span>
+          <img src="<%= proximosDiasImg.imagem3 %>" alt="">
+          <span class="previsao-proximos-dias"><%= figcaption.figcaption3 %></span>
+          <div class=tempFooter>
+            <span class="text-primary h5"><%= temperaturaNext.min3 %> <i class="fa fa-thermometer-empty"></i></span>
+            <span class="text-danger h5"><%= temperaturaNext.max3 %> <i class="fa fa-thermometer-empty"></i></span>
+          </div>
+        </div>
+        <div class="col-md-2 d-flex align-items-center flex-column text-center mg-top-40">
+          <span class="font-weight-bold d-flex justify-content-center">
+              <%= proximosDias.proximo4 %>
+              <br>
+              <%= proximosDias.dia4 %>
+          </span>
+          <img src="<%= proximosDiasImg.imagem4 %>" alt="">
+          <span class="previsao-proximos-dias"><%= figcaption.figcaption4 %></span>
+          <div class=tempFooter>
+            <span class="text-primary ch5"><%= temperaturaNext.min4 %> <i class="fa fa-thermometer-empty"></i></span>
+            <span class="text-danger h5"><%= temperaturaNext.max4 %> <i class="fa fa-thermometer-empty"></i></span>
+          </div>
+        </div>
+        <div class="col-md-2 d-flex align-items-center flex-column text-center mg-top-40">
+          <span class="font-weight-bold d-flex justify-content-center">
+              <%= proximosDias.proximo5 %>
+              <br>
+              <%= proximosDias.dia5 %>
+          </span>
+          <img src="<%= proximosDiasImg.imagem5 %>" alt="">
+          <span class="previsao-proximos-dias"><%= figcaption.figcaption5 %></span>
+          <div class=tempFooter>
+            <span class="text-primary h5"><%= temperaturaNext.min5 %> <i class="fa fa-thermometer-empty"></i></span>
+            <span class="text-danger h5"><%= temperaturaNext.max5 %> <i class="fa fa-thermometer-empty"></i></span>
+          </div>
+        </div>
+        <div class="col-md-2 d-flex align-items-center flex-column text-center mg-top-40">
+          <span class="font-weight-bold d-flex justify-content-center">
+              <%= proximosDias.proximo6 %>
+              <br>
+              <%= proximosDias.dia6 %>
+          </span>
+          <img src="<%= proximosDiasImg.imagem6 %>" alt="">
+          <span class="previsao-proximos-dias"><%= figcaption.figcaption6 %></span>
+          <div class=tempFooter>
+            <span class="text-primary h5"><%= temperaturaNext.min6 %>  <i class="fa fa-thermometer-empty"></i></span>
+            <span class="text-danger h5"><%= temperaturaNext.max6 %>  <i class="fa fa-thermometer-empty"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<%- include("../../partials/footer");  %> 

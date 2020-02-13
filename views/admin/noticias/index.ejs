@@ -1,0 +1,62 @@
+<%- include('../../partials/header'); %>
+<%- include('../../partials/navbar'); %>
+
+<div class="container mg-bottom-100">
+    <h2 class="mg-top-20">Noticias</h2>
+    <a class="btn btn-success mg-bottom-20" href="/admin/noticias/new">Adicionar nova noticia</a>
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Noticia</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% noticias.forEach(noticias => { %>
+                <tr>
+                    <th class="id"><%= noticias.id %></th>
+                    <th class="title"><%= noticias.title %></th>
+                    <th class="noticia"><%= noticias.news %></th>
+                    <th>
+                        <a href="/admin/noticias/edit/<%= noticias.id %>" class="btn btn-outline-success"><i class="far fa-edit"></i>Editar</a>
+                        <form method="POST" action="/noticias/delete"  style="display: inline;" onsubmit="ConfirDelete(event, this)">
+                            <input type="hidden" name="id" value="<%= noticias.id %>">
+                            <button class="btn btn-outline-danger"><i class="far fa-trash"></i>Deletar</button>
+                        </form>
+                    </th>
+                </tr>
+             <% }) %>
+        </tbody >
+    </table>
+</div>
+<script>
+    function ConfirDelete(event, form){
+        event.preventDefault();
+        Swal.fire({
+            title: 'A você tem certeza?',
+            text: "Você não poderá reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, delete ela!'
+            }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                'Deletado!',
+                'Essa noticias foi deletada com sucesso!',
+                'success'
+                );
+                
+                setTimeout(function(){
+                    form.submit();
+                }, 1300)
+                
+            }
+        })
+    }
+
+</script>
+<%- include('../../partials/footer'); %>

@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-image: url(../img/bg-whats.png);
+    background-color: #E4DCD4;
+}
+
+*{
+    outline: none!important;
+}
+.navbar-nav nav li{
+    display: inline; 
+}
+.navbar-nav .nav-item{
+    justify-content: space-between;
+    display: flex
+}
+
+
+.navbar-brand img{
+    width:150px;
+}
+.bg-whatsapp{
+    background-color: #009688; /*#1bb9a1*/;
+}
+a.btn.btn-outline-success,
+button.btn.btn-outline-danger{
+    min-width: 100px;
+    margin: 5px 0px;
+}
+
+.btn i,
+.nav-link i{
+    margin-right:5px
+}
+
+.flex-center-column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.container_day{
+    max-width: 650px;
+}
+
+.card-body.mg-top-20 .d-flex.flex-row.justify-content-center img{
+    max-width: 110px;
+}
+
+@media screen and (max-width:768px){
+    .card-body.mg-top-20 .d-flex.flex-row.justify-content-center{
+        flex-direction: column!important;
+    }
+    .tempFooter .text-primary,
+    .tempFooter .text-danger{
+        font-size: 30px;
+    }
+    .previsao-proximos-dias{
+        font-size: 20px;
+    }
+
+    .flex-center{
+        flex-direction: column;
+    }
+    .max-min span{
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 998px) and (min-width: 768px){
+    .tempFooter .text-primary,
+    .tempFooter .text-danger{
+        font-size: 15px;
+    }
+    .previsao-proximos-dias{
+        font-size: 13px;
+    }
+}
+
+.max-min span{
+    font-size: 28px;
+    font-weight: bold;
+}
+.col-md-2.d-flex.align-items-center.flex-column.text-center.mg-top-40{
+    min-height: 250px;
+    border-left: 1px dotted #c3c3c3;
+    border-right: 1px dotted #c3c3c3;
+}
+.tempFooter{
+   position: absolute;
+    bottom: 0px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around; 
+}
+
+
+/*Classes Complementares*/
+
+/*MARGIN BOTTOM*/
+.mg-bottom-20{
+    margin-bottom: 20px;
+}
+
+.mg-bottom-40{
+    margin-bottom: 40px;
+}
+
+.mg-bottom-80{
+    margin-bottom: 80px;
+}
+
+.mg-bottom-100{
+    margin-bottom: 100px;
+}
+
+/*MARGIN TOP*/
+
+.mg-top-20{
+    margin-top: 20px;
+}
+
+.mg-top-40{
+    margin-top: 40px;
+}
+
+.mg-top-80{
+    margin-top: 80px;
+}
+
+.mg-top-100{
+    margin-top: 100px;
+}

@@ -1,0 +1,19 @@
+<%- include("../../partials/header"); %>
+<%- include("../../partials/navbar"); %>
+<div class="container mg-bottom-100">
+  <div class="card mg-top-20">
+    <div class="card-header bg-dark text-white">
+      Rastrear Encomenda
+    </div>
+    <div class="card-body">
+        <form method="POST" action="/admin/rastreio/resultado">
+          <input type="text" placeholder="Ex: LL478400483CN" name="codigo" class="form-control">
+          <br>
+          <button class="btn btn-success">Rastrear</button>
+        </form>
+    </div>
+
+  </div>
+
+</div>
+<%- include("../../partials/footer"); %>

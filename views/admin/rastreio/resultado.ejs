@@ -1,0 +1,107 @@
+<%- include("../../partials/header"); %>
+<%- include("../../partials/navbar"); %>
+<div class="container">
+  <br>
+  <div class="card border-success mb-3 mg-top-40 mg-bottom-100">
+      <div class="card-header d-flex justify-content-center text-white bg-dark">
+        <h3><%= ultimoStatus.titulo %></h3>
+      </div>
+      <div class="card-body">
+        <span><strong style="font-size: 18px;"></strong><%= ultimoStatus.status %></strong></span>
+        <br>
+        <span><strong style="font-size: 18px;"><%= ultimoStatus.data %></strong></span>
+        <br>
+        <span><strong style="font-size: 18px;"><%= ultimoStatus.local %></strong></span>
+      </div>
+  </div>
+  <div class="card mg-top-40">
+    <div class="card-header d-flex justify-content-center text-white bg-dark">
+      <h3>Histórico do Objeto</h3>
+    </div>
+
+    <% if (history.data1 != null) { %>
+      <div class="card-body">
+        <span><strong>Data:</strong> <%= history.data1 %></span>
+        <br>
+        <span><strong>Status:</strong> <%= history.status1 %></span>
+        <br>
+        <span><strong>Local:</strong> <%= history.local1 %></span>
+      </div>
+      <hr>
+    <% } %>
+
+    <% if (history.data2 != null) { %>
+    <div class="card-body">
+      <span><strong>Data:</strong> <%= history.data2 %></span>
+      <br>
+      <span><strong>Status:</strong> <%= history.status2 %></span>
+      <br>
+      <span><strong>Local:</strong> <%= history.local2 %></span>
+    </div>
+    <hr>
+    <% } %>
+    
+    <% if (history.data3!= null) { %>
+    <div class="card-body">
+      <span><strong>Data:</strong> <%= history.data3 %></span>
+      <br>
+      <span><strong>Status:</strong> <%= history.status3 %></span>
+      <br>
+      <span><strong>Local:</strong> <%= history.local3 %></span>
+    </div>
+    <hr>
+    <% } %>
+
+    <% if (history.data4!= null) { %>
+      <div class="card-body">
+        <span><strong>Data:</strong> <%= history.data4 %></span>
+        <br>
+        <span><strong>Status:</strong> <%= history.status4 %></span>
+        <br>
+        <span><strong>Local:</strong> <%= history.local4 %></span>
+      </div>
+      <hr>
+    <% } %>
+
+    <% if (history.data5!= null) { %>
+      <div class="card-body">
+        <span><strong>Data:</strong> <%= history.data5 %></span>
+        <br>
+        <span><strong>Status:</strong> <%= history.status5 %></span>
+        <br>
+        <span><strong>Local:</strong> <%= history.local5 %></span>
+      </div>
+      <hr>
+      <% } %>
+
+      <% if (history.data6!= null) { %>
+        <div class="card-body">
+          <span><strong>Data:</strong> <%= history.data6 %></span>
+          <br>
+          <span><strong>Status:</strong> <%= history.status6 %></span>
+          <br>
+          <span><strong>Local:</strong> <%= history.local6 %></span>
+        </div>
+        <hr>
+      <% } %>
+
+      <% if (history.data7!= null) { %>
+        <div class="card-body">
+          <span><strong>Data:</strong> <%= history.data7 %></span>
+          <br>
+          <span><strong>Status:</strong> <%= history.status7 %></span>
+          <br>
+          <span><strong>Local:</strong> <%= history.local7 %></span>
+        </div>
+        <hr>
+      <% } %>
+  </div>
+  <div class="row justify-content-center mg-top-20 mg-bottom-20">
+    <div class="col-md-12 text-center">
+        <a href="/admin/rastreio" class="btn btn-danger"><i class="fad fa-chevron-circle-left"></i>Voltar</a>
+    </div>
+  </div>  
+
+
+</div>
+<%- include("../../partials/footer"); %>

@@ -1,0 +1,26 @@
+{
+  "name": "blog-curso",
+  "version": "1.0.0",
+  "description": "Blog do curso",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Evandro Pinheiro",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "crawler": "^1.2.1",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "request": "^2.88.0",
+    "sequelize": "^5.21.3",
+    "slugify": "^1.3.6",
+    "user-instagram": "^1.0.4",
+    "request-promise": "*"
+  }
+}

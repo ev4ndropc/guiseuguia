@@ -1,0 +1,33 @@
+<%- include('../../partials/header');%>
+<%- include('../../partials/navbar');%>
+
+<div class="container mg-bottom-100">
+    <br>
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            <h2>Editar Noticias</h2>
+        </div>
+        <div class="card-body">
+            <form id="form" method="POST" action="/noticias/update">
+                <input type="text" name="title" placeholder="Defina o titulo da noticias" class="form-control" value="<%= noticias.title %>"></input>
+                <input type="hidden" name="id" value="<%= noticias.id %>">
+                <br>
+                
+                <textarea id="emoji" name="news" rows="10" cols="5" class="form-control"><%= noticias.news %></textarea>
+                <br>
+                <button class="btn btn-outline-success">Atualizar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $("#form").submit(function() {
+    if($("input[name=title]").val()== null || $("input[name=title]").val() ==""){
+        Swal.fire('O campo de titulo da noticias está vazio!')     
+        return false;
+    }
+
+})
+</script>
+
+<%- include('../../partials/footer');%>

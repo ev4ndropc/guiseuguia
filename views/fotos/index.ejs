@@ -1,0 +1,17 @@
+<%- include("../partials/header"); %>
+    <%- include("../partials/navbar"); %>
+        <div class="container">
+            <div class="card mg-top-20">
+                <div class="card-header bg-dark text-white">
+                    Digite o código que você recebeu para baixar sua foto.
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/fotos/procurar">
+                        <input class="form-control" type="text" name="codigo_img" placeholder="Digite o seu código.">
+                        <button class="btn btn-success mg-top-20">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <%- include("../partials/footer"); %>

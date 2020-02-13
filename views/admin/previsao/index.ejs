@@ -1,0 +1,27 @@
+<%- include("../../partials/header"); %>
+
+<%- include("../../partials/navbar"); %>
+
+<div class="container mg-top-20">
+<div class="card">
+    <div class="card-header bg-dark text-white">
+      Digite o estado e a cidade
+    </div>
+    <div class="card-body">
+      <form class="form-inline" method="POST" action="/admin/previsao/">
+        <div class="form-group mx-sm-3 mb-2">
+          <label class="sr-only">Estado</label>
+          <input value="RJ"  maxlength="2" minlength="2" name="estado" type="text" class="form-control" placeholder="Ex: RJ">
+        </div>
+      
+        <div class="form-group mx-sm-3 mb-2">
+          <label class="sr-only">Cidade</label>
+          <input value="nova-friburgo" name="cidade" type="text" class="form-control" placeholder="Ex: Nova Friburgo">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+      </form>
+    </div>
+</div>
+</div>
+
+<%- include("../../partials/footer"); %>

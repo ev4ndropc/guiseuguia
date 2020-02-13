@@ -1,0 +1,17 @@
+<%- include("../partials/header"); %>
+    <%- include("../partials/navbar"); %>
+        <div class="container">
+            <div class="card mg-top-20">
+                <div class="card-header bg-dark text-white">
+                    Fotos encontradas
+                </div>
+                <div class="card-body border-success">
+                    <img style="max-width: 100%;" src="/img/fotos-carnaval/<%= codigo_img %>.png" alt="Foto código <%= codigo_img %>">
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-center">
+                    <a href="/img/fotos-carnaval/<%= codigo_img %>.png" download data-toggle="tooltip" data-placement="top" title="Clique para fazer o download" class="btn btn-success text-white"><i class="far fa-cloud-download-alt text-white"></i>Baixar</a>
+                </div>               
+            </div>
+        </div>
+
+<%- include("../partials/footer"); %>

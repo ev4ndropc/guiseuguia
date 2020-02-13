@@ -1,0 +1,13 @@
+<%- include('partials/header.ejs'); %>
+<body>
+    <%- include('partials/navbar'); %>
+    <div class="container">
+        <h2 class="mg-top-20">Noticias</h2>
+        <% noticias.forEach(noticias => { %>
+            <div class="alert alert-success " role="alert">
+                <p><%= noticias.news %></p><br>
+            </div>
+         <% }) %>
+    </div>
+</body>
+<%- include('partials/footer.ejs'); %>
