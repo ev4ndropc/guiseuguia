@@ -7,6 +7,7 @@ const connection = require("./database/database")
 const request = require("request-promise");
 const cheerio = require("cheerio");
 var Crawler = require("crawler");
+const {google} = require('googleapis');
 
 const articlesController = require("./articles/articlesController")
 const newsController = require("./noticias/noticiasController")
