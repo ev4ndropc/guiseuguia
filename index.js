@@ -149,7 +149,7 @@ var intentName = req.body.queryResult.intent.displayName;
   c.queue('https://guiseuguia.herokuapp.com/admin/noticias/');
   
     
-  if (intentName == "AgendarHorario") {
+
 // Enter your calendar ID below and service account JSON below
 const calendarId = "iqsitscqq9p3tsacp07ci5tdm0@group.calendar.google.com";
 const serviceAccount = {
@@ -164,7 +164,9 @@ const serviceAccount = {
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/barbeariacalendar%40automatiz.iam.gserviceaccount.com"
 };
- 
+//const timeZone = 'America/Sao_Paulo';
+const timeZoneOffset = '-03:00';
+
 const serviceAccountAuth = new google.auth.JWT({
  email: serviceAccount.client_email,
  key: serviceAccount.private_key,
@@ -172,62 +174,29 @@ const serviceAccountAuth = new google.auth.JWT({
 });
 
 const calendar = google.calendar('v3');
-process.env.DEBUG = 'dialogflow:*';
 
-const timeZone = 'America/Sao_Paulo';
-const timeZoneOffset = '-03:00';
+if (intentName === "AgendarHorario") {
+    let servicos = request.body.queryResult.parameters['servicos'];
+    let data = request.body.queryResult.parameters['data'];
+    let hora = request.body.queryResult.parameters['hora'];
 
-exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
-const agent = new WebhookClient({ request, response });
-console.log("Parameters", agent.parameters);
-const appointment_type = agent.parameters.servicos;
-
-function makeAppointment (agent) {
-const dateTimeStart = new Date(Date.parse(agent.parameters.data.split('T')[0] + 'T' +
-agent.parameters.hora.split('T')[1].split('-')[0] + timeZoneOffset));
- const dateTimeEnd = new Date(new Date(dateTimeStart).setHours(dateTimeStart.getHours() + 1 ));
- const appointmentTimeString = dateTimeStart.toLocaleString(
-  'pt-BR',
-  { month: 'long', day: 'numeric', hour: 'numeric', timeZone: timeZone }
- );
-
- return createCalendarEvent(dateTimeStart, dateTimeEnd, appointment_type).then(() => {
-  agent.add(`Ok, sua consulta está marcada!. ${appointmentTimeString}`);
- }).catch(() => {
-  agent.add(`Sinto muito, não há vaga disponível para: ${appointmentTimeString}.`);
- });
+    const dataTimeStart = new Date(Date.parse(data.split('T')[0] + 'T' + hora.split('T')[1].split('-')[0] + timeZoneOffset));
+    const dateTimeEnd = new Date(new Date(dateTimeStart).setHours(dateTimeStart.getHours() + 1));
+    const agendamentoString = formatData(new Date(data.split('T')[0])) + " as "+hora.split('T')[1].split('-')[0];
 
 }
-makeAppointment()
 
-function createCalendarEvent (dateTimeStart, dateTimeEnd, appointment_type) {
- return new Promise((resolve, reject) => {
-  calendar.events.list({
-   auth: serviceAccountAuth,
-   calendarId: calendarId,
-   timeMin: dateTimeStart.toISOString(),
-   timeMax: dateTimeEnd.toISOString()
-  }, (err, calendarResponse) => {
-   if (err || calendarResponse.data.items.length > 0) {
-     reject(err || new Error('O horário solicitado entra em conflito com outro compromisso'));
-   } else {
+function formatData(date){
+    var nomeMes = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto",
+        "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
 
-         calendar.events.insert({ auth: serviceAccountAuth,
-           calendarId: calendarId,
-           resource: {summary: appointment_type +' Agendamento Confirmado', description: appointment_type,
-            start: {dateTime: dateTimeStart},
-            end: {dateTime: dateTimeEnd}}
-         }, (err, event) => {
-           err ? reject(err) : resolve(event);
-         }
-         );
-   }
-  });
- });
-}
-});
+    var dia = date.getDate();
+    var mesIndex = date.getMonth();
+    var ano = date.getFullYear();
 
-
+    return dia + '' +nomeMes[mesIndex] + '' + ano;
 }
     
     
