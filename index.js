@@ -176,9 +176,9 @@ const serviceAccountAuth = new google.auth.JWT({
 const calendar = google.calendar('v3');
 
 if (intentName === "AgendarHorario") {
-    let servicos = request.body.queryResult.parameters['servicos'];
-    let data = request.body.queryResult.parameters['data'];
-    let hora = request.body.queryResult.parameters['hora'];
+    let servicos = req.body.queryResult.parameters['servicos'];
+    let data = req.body.queryResult.parameters['data'];
+    let hora = req.body.queryResult.parameters['hora'];
 
     const dateTimeStart = new Date(Date.parse(data.split('T')[0] + 'T' + hora.split('T')[1].split('-')[0] + timeZoneOffset));
     const dateTimeEnd = new Date(new Date(dateTimeStart).setHours(dateTimeStart.getHours() + 1));
