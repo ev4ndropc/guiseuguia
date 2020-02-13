@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 const connection = require("./database/database")
 const request = require("request-promise");
 const cheerio = require("cheerio");
@@ -180,11 +180,52 @@ if (intentName === "AgendarHorario") {
     let data = request.body.queryResult.parameters['data'];
     let hora = request.body.queryResult.parameters['hora'];
 
-    const dataTimeStart = new Date(Date.parse(data.split('T')[0] + 'T' + hora.split('T')[1].split('-')[0] + timeZoneOffset));
+    const dateTimeStart = new Date(Date.parse(data.split('T')[0] + 'T' + hora.split('T')[1].split('-')[0] + timeZoneOffset));
     const dateTimeEnd = new Date(new Date(dateTimeStart).setHours(dateTimeStart.getHours() + 1));
     const agendamentoString = formatData(new Date(data.split('T')[0])) + " as "+hora.split('T')[1].split('-')[0];
 
+    return criarEventoCalendario(dateTimeStart, dateTimeEnd, servicos, data, hora).then(() =>{
+        let mensagem = `Excelente, seu serviço esta agendado para ${agendamentoString} `;
+        console.log(mensagem);
+        responsed.json({"fulfillmentText": mensagem});
+    }).catch(()=>{
+        let mensagem = `Desculpa, não temos mais vagas para ${agendamentoString}. `;
+        console.log(mensagem);
+        responsed.json({"fulfillmentText": mensagem});
+
+    })
+
 }
+
+//Creates calendar event in Google Calendar
+function criarEventoCalendario (dateTimeStart, dateTimeEnd, servicos, data, hora) {
+    return new Promise((resolve, reject) => {
+      calendar.events.list({
+        auth: serviceAccountAuth, // List events for time period
+        calendarId: calendarId,
+        timeMin: dateTimeStart.toISOString(),
+        timeMax: dateTimeEnd.toISOString()
+      }, (err, calendarResponse) => {
+        // Check if there is a event already on the Calendar
+        if (err || calendarResponse.data.items.length > 0) {
+          reject(err || new Error('Requisição conflita com outros agendamentos'));
+        } else {
+          // Create event for the requested time period
+          calendar.events.insert({ auth: serviceAccountAuth,
+            calendarId: calendarId,
+            resource: {summary: servicos , description: servicos,
+              start: {dateTime: dateTimeStart},
+              end: {dateTime: dateTimeEnd}}
+          }, (err, event) => {
+            err ? reject(err) : resolve(event);
+          }
+          );
+        }
+      });
+    });
+   }
+
+
 
 function formatData(date){
     var nomeMes = [
