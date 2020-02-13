@@ -148,6 +148,86 @@ var intentName = req.body.queryResult.intent.displayName;
   c.queue('https://guiseuguia.herokuapp.com/admin/noticias/');
   
     
+  if (intentName == "AgendarHorario") {
+// Enter your calendar ID below and service account JSON below
+const calendarId = "iqsitscqq9p3tsacp07ci5tdm0@group.calendar.google.com";
+const serviceAccount = {
+  "type": "service_account",
+  "project_id": "automatiz",
+  "private_key_id": "22d0aed83c8558c1acd0814fe110e0d54a87aeca",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCsqtt9vSssQ+o8\nhB0Aq/Dr6zASLp3Ps2za6du/+ELrBQtPN++QYRfBhzPSC2HGsjF/vfmG/dzZGU1i\nZWPYwUvNU43LgNWd/L7BBUUyFC+NKkP9pAovG5WpjPYphbDPAPaXDmNAFxh7FHov\nF7TeV3wQBRsgYwi/xtmLq/JcCpCWsrAi46nzx7jwYdCzv+ixwXc1uXyvsCYGttCY\ndloL4BgUyC6ahe2vtQnmiXAFOlpqhARyTqeRkrVchSc/PV2LlJwL5Kqg43WGJq+3\ng0f+WjaDYZzBjmjQxCYV6Sp3eji+ImIs2DM7UJyOj1BjUQ8fHmPv6xEMju+/Xxgl\nR72N/yNXAgMBAAECggEAVY/O90Zzq9o1quo+ovQRDR78sa3W9rLvOKWVBtJDesmD\nmqxZsp5iUryoMagBOiBYBfiCO2H1+8Cdh6o9aY4TfXovdA3yDPlPHz/404GMNLQi\ngAA3KbPOHHglDVtZy6IrD5yKExq+v1Lc3xQsxNbuO9QD5q8ciUfEyoEYtoJntryg\n3RLrWNXt+2N55p4+Hic5YjN/KbDHQRfOsV17ov1TKOXepTLS4+7v9K1SEyu9/7oB\nyTPG65ZkcQ+NKyk0BBoyKh2muR+Tbk3q0h4inl4uJKtx+H1MPpvFCJtc0ihUjagR\nuA3yoS5qWof7Ygy1XdPDMCvUMzknYTvkY7481OZqoQKBgQDnH8D2Dt9ZR20iQVI5\nZS3W8LAIOAtuhaFVr6gJMGr6GBnt4nHUB3BI0a1lXlNTyFLjItHkmUr+4TMpA6UZ\nL7wwhoxu4nc/KGzD8WEBdrweEEOSGqsF0Hwdn5W13Td3kUBPYnD024Y4iToR1CoG\n50unayve+rY6ti2S+erELCRFdwKBgQC/QG0ySDbAIMOLlZK1bs0mpkPgPYwTTh7l\n29tfsWoejol/pLv1Dx8iVd8NBld8SBk9se6Y21DmavScYZBJxZqr4cveT1zTGB0m\nRsBGG6XE9qNpI/CcwXJrCNNwNS12GFbh95YpODDO/eKNpM9W/sUaVUKltwJsJ+AW\n1vjffGcJIQKBgQDFoqCViAgzRuGqniLak4uMNgrBLHOSEdDw/aD6Ip4HuB5MDgv6\nHFZG3o2glfU5Op6uPbMwAGlh5F6kHsrJ68jH0fY6R4tixYWkVD74Snj4WD3/rLA7\n65iGmFUjy8PHibxtZadjqmhu5eFzJ3K8roJB6mH8bXTwZaI5AV5gW8K0ZwKBgD34\nrmmApN0UwMhWKzfHM4q2jX/38Y+/3Js25prXbj+AiGVoB8+cmsYRdTlPOMH4ytUG\n9v1o84n2VlTl+E8vTLMtc1YR+U4dnjRs8JjHFKwCD2leT/U7acvtDDZrxNNjh6Op\nCmtI3ef0tJiZMuZJn6ysu+/eoVZShXZhKjugn/KBAoGAVnVB4XQMsdOqSI/bLmEC\n1+P2Gs+iPSSovfPeo2M7k9KgDO5S/EF1IwdW89IedXoOEu4IDPNoV9RR5eHMX/OQ\nX/Eblpm693z3ZLGoYpYV64JCSFHWWKVFd9L+vGITVIh5fBtNbqPTy2JtUl7B5eVp\npLP+Sy2VqLYrATqYNXKpVZ4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "barbeariacalendar@automatiz.iam.gserviceaccount.com",
+  "client_id": "109682010363952510050",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/barbeariacalendar%40automatiz.iam.gserviceaccount.com"
+};
+ 
+const serviceAccountAuth = new google.auth.JWT({
+ email: serviceAccount.client_email,
+ key: serviceAccount.private_key,
+ scopes: 'https://www.googleapis.com/auth/calendar'
+});
+
+const calendar = google.calendar('v3');
+process.env.DEBUG = 'dialogflow:*';
+
+const timeZone = 'America/Sao_Paulo';
+const timeZoneOffset = '-03:00';
+
+exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
+const agent = new WebhookClient({ request, response });
+console.log("Parameters", agent.parameters);
+const appointment_type = agent.parameters.servicos;
+
+function makeAppointment (agent) {
+const dateTimeStart = new Date(Date.parse(agent.parameters.data.split('T')[0] + 'T' +
+agent.parameters.hora.split('T')[1].split('-')[0] + timeZoneOffset));
+ const dateTimeEnd = new Date(new Date(dateTimeStart).setHours(dateTimeStart.getHours() + 1 ));
+ const appointmentTimeString = dateTimeStart.toLocaleString(
+  'pt-BR',
+  { month: 'long', day: 'numeric', hour: 'numeric', timeZone: timeZone }
+ );
+
+ return createCalendarEvent(dateTimeStart, dateTimeEnd, appointment_type).then(() => {
+  agent.add(`Ok, sua consulta está marcada!. ${appointmentTimeString}`);
+ }).catch(() => {
+  agent.add(`Sinto muito, não há vaga disponível para: ${appointmentTimeString}.`);
+ });
+
+}
+makeAppointment()
+
+function createCalendarEvent (dateTimeStart, dateTimeEnd, appointment_type) {
+ return new Promise((resolve, reject) => {
+  calendar.events.list({
+   auth: serviceAccountAuth,
+   calendarId: calendarId,
+   timeMin: dateTimeStart.toISOString(),
+   timeMax: dateTimeEnd.toISOString()
+  }, (err, calendarResponse) => {
+   if (err || calendarResponse.data.items.length > 0) {
+     reject(err || new Error('O horário solicitado entra em conflito com outro compromisso'));
+   } else {
+
+         calendar.events.insert({ auth: serviceAccountAuth,
+           calendarId: calendarId,
+           resource: {summary: appointment_type +' Agendamento Confirmado', description: appointment_type,
+            start: {dateTime: dateTimeStart},
+            end: {dateTime: dateTimeEnd}}
+         }, (err, event) => {
+           err ? reject(err) : resolve(event);
+         }
+         );
+   }
+  });
+ });
+}
+});
+
+
+}
     
     
   var b = new Crawler({
