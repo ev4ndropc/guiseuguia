@@ -1,0 +1,77 @@
+<%- include("../partials/header"); %>
+<%- include("../partials/navbar"); %>
+<div class="container mg-bottom-100 mg-top-40">
+  <h2 class="mg-top-20">Promoção</h2>
+  <div class="card">
+      <div class="card-header bg-dark text-white">
+          Adicionar imagens de promoção
+      </div>
+      <div class="card-body bg-dark text-white">
+          <form action="/promocao/uploader" method="POST" enctype="multipart/form-data">
+          <input type="file" name="file" >
+          <button class="btn btn-outline-success">Enviar</button>
+          <br>
+          Obs: <span class="text-warning mg-top-20">Todas as imagens devem estar no formato PNG e com nome na seguinte ordem (promocao1, promocao2 etc...)</span>
+          </form>
+      </div>     
+  </div>
+  <div class="card mg-top-40">
+    <div class="card-header">
+      <h2 class="mg-top-20">Imagens Enviadas</h2>
+    </div>
+    <div class="card-body">
+        <div class="container-imgs">
+            <% if (img1 != undefined) { %>
+
+                <div class="img1">
+                  <div class="card-header bg-dark text-white">
+                      <h4 class="text-center"><%= img1 %></h4>
+                  </div>
+                    <img src="/img/promocoes/<%= img1 %>" alt="">
+                </div>
+
+            <% } %>
+
+            <% if (img2 != undefined) { %>
+                <div class="img2">
+                  <div class="card-header bg-dark text-white">
+                    <h4 class="text-center"><%= img2 %></h4>
+                  </div>
+                  <img src="/img/promocoes/<%= img2 %>" alt="">
+                </div>
+          <% } %>
+
+          <% if (img3 != undefined) { %>
+            <div class="img3">
+              <div class="card-header bg-dark text-white">
+                <h4 class="text-center"><%= img3 %></h4>
+              </div>
+              <img src="/img/promocoes/<%= img3 %>" alt="">
+            </div>
+          <% } %>
+
+          <% if (img4 != undefined) { %>
+            <div class="img4">
+              <div class="card-header bg-dark text-white">
+                <h4 class="text-center"><%= img4 %></h4>
+              </div>
+              <img src="/img/promocoes/<%= img4 %>" alt="">
+            </div>
+          <% } %>
+
+          <% if (img5 != undefined) { %>
+            <div class="img5">
+              <div class="card-header bg-dark text-white">
+                <h4 class="text-center"><%= img5 %></h4>
+              </div>
+              <img src="/img/promocoes/<%= img5 %>" alt="">
+            </div>
+          <% } %>
+
+        </div>
+        
+    </div>
+    
+  </div>
+</div>
+<%- include("../partials/footer"); %>

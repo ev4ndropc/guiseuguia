@@ -75,6 +75,16 @@ button.btn.btn-outline-danger{
     .max-min span{
         font-size: 18px;
     }
+
+    .container-imgs{
+	display:flex;
+	justify-content: space-around;
+    	flex-direction:column!important;
+    }
+    .img1,
+    .img2, .img3, .img4, .img5 {
+    width: 100%!important;
+}
 }
 
 @media screen and (max-width: 998px) and (min-width: 768px){
@@ -140,4 +150,24 @@ button.btn.btn-outline-danger{
 
 .mg-top-100{
     margin-top: 100px;
+} 
+
+.container-imgs{
+	display:flex;
+	justify-content: space-around;
+	flex-direction:row;
+}
+
+
+.container-imgs img{
+	width:100%;
+
+}
+
+.img1,
+.img2,
+.img3,
+.img4,
+.img5{
+ width:33%;
 }
