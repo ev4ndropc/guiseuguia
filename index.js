@@ -10,7 +10,7 @@ var Crawler = require("crawler");
 const {google} = require('googleapis');
 
 const { Client, Location, MessageMedia } = require('whatsapp-web.js');
-const client = new Client({puppeteer: {headless: true}, session: sessionCfg});
+const client = new Client({puppeteer: {headless: true}});
 
 const articlesController = require("./articles/articlesController")
 const newsController = require("./noticias/noticiasController")
@@ -24,11 +24,11 @@ const Noticias = require("./noticias/Noticias")
 const Rastreio = require("./rastreio/Rastreio")
 const Fotos = require("./fotos/Fotos")
 
-const SESSION_FILE_PATH = './session.json';
+/*const SESSION_FILE_PATH = './session.json';
 let sessionCfg;
 if (fs.existsSync(SESSION_FILE_PATH)) {
     sessionCfg = require(SESSION_FILE_PATH);
-}
+}*/
 
 
 client.initialize();
