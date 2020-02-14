@@ -10,7 +10,7 @@ var Crawler = require("crawler");
 const {google} = require('googleapis');
 
 const { Client, Location, MessageMedia } = require('whatsapp-web.js');
-const client = new Client({puppeteer: {headless: true}});
+const client = new Client({puppeteer: {headless: true}, session: sessionCfg});
 
 const articlesController = require("./articles/articlesController")
 const newsController = require("./noticias/noticiasController")
