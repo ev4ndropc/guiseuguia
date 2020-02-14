@@ -8,6 +8,8 @@ const request = require("request-promise");
 const cheerio = require("cheerio");
 var Crawler = require("crawler");
 const {google} = require('googleapis');
+const { Client, Location, MessageMedia } = require('whatsapp-web.js');
+const client = new Client({puppeteer: {headless: true}, session: sessionCfg});
 
 const articlesController = require("./articles/articlesController")
 const newsController = require("./noticias/noticiasController")
@@ -22,7 +24,58 @@ const Rastreio = require("./rastreio/Rastreio")
 const Fotos = require("./fotos/Fotos")
 
 
+client.initialize();
 
+client.on('qr', (qr) => {
+    // NOTE: This event will not be fired if a session is specified.
+    console.log('QR RECEIVED', qr);
+});
+
+client.on('authenticated', (session) => {
+    console.log('AUTHENTICATED', session);
+
+    if (!fs.existsSync(SESSION_FILE_PATH)) {
+        fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), function(err) {
+            if (err) {
+                console.error(err);
+            }
+        });
+    }
+});
+
+client.on('auth_failure', msg => {
+    // Fired if session restore was unsuccessfull
+    console.error('AUTHENTICATION FAILURE', msg);
+});
+
+client.on('ready', () => {
+    console.log('READY');
+});
+
+
+client.on('message', async msg => {
+  console.log('MESSAGE RECEIVED', msg);
+
+
+  if (msg.body == 'menu') {
+      client.sendMessage(msg.from, 'Aguarde, estamos carregando sua imagem.');
+      image2base64('https://i.pinimg.com/originals/1f/87/90/1f8790df8b450fbf5c3b4a6b9db4f822.jpg') // you can also to use url
+          .then(
+              (response) => {
+                  const base64 = response;
+                  const mimetype = 'image/png';
+                  const media = new MessageMedia(mimetype, base64);
+                  client.sendMessage(msg.from, media);
+              }
+          )
+          .catch(
+              (error) => {
+                  console.log(error); //Exepection error....
+              }
+          );
+
+  }
+});
 
 //Setando uma view engina
 app.set('view engine', 'ejs');

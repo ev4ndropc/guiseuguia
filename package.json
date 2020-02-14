@@ -16,12 +16,13 @@
     "crawler": "^1.2.1",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
+    "googleapis": "*",
     "mysql2": "^2.1.0",
     "request": "^2.88.0",
+    "request-promise": "*",
     "sequelize": "^5.21.3",
     "slugify": "^1.3.6",
     "user-instagram": "^1.0.4",
-    "request-promise": "*",
-    "googleapis": "*"
+    "whatsapp-web.js": "^1.0.2"
   }
 }
