@@ -337,12 +337,12 @@ function formatData(date){
 });
 
 //Configurando servidor
-//app.listen(80, () => {
-//  console.log("Servidor Rodando!");
-//})
+/*app.listen(80, () => {
+  console.log("Servidor Rodando!");
+})*/
 
 
 //Configurando servidor
 app.listen(process.env.PORT || 3000, () => {
    console.log("Servidor Rodando!");
-})
+});
