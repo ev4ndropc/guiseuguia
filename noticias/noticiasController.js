@@ -2,75 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Noticias = require("./Noticias")
 const slugify = require("slugify")
-const multer = require("multer")
-const fs = require("fs")
 
-
-const storage = multer.diskStorage({
-    destination: function(req, file, cd){
-        cd(null, "public/img/promocoes")
-    },
-    filename: function(req, file, cd){
-        cd(null, file.originalname);
-    }
-})
-
-const upload = multer ({storage})
-
-router.post("/promocao/uploader",upload.single("file"), (req, res) =>{
-    try {
-        if(fs.existsSync('public/img/promocoes/promocao1.png')) {
-            var img1 = "promocao1.png";
-        }if(fs.existsSync('public/img/promocoes/promocao2.png')){
-            var img2 = "promocao2.png";
-        }if(fs.existsSync('public/img/promocoes/promocao3.png')){
-            var img3 = "promocao3.png";
-        }if(fs.existsSync('public/img/promocoes/promocao4.png')){
-            var img4 = "promocao4.png";
-        }if(fs.existsSync('public/img/promocoes/promocao5.png')){
-            var img5 = "promocao5.png";
-        } else {
-            console.log('The file does not exist.');
-        }
-    } catch (err) {
-        console.error(err);
-    }
-    res.render("promocao/index", {
-        img1: img1,
-        img2: img2,
-        img3: img3,
-        img4: img4,
-        img5: img5
-    })
-});
-
-router.get("/promocao/", (req, res) =>{
-    try {
-        if(fs.existsSync('public/img/promocoes/promocao1.png')) {
-            var img1 = "promocao1.png";
-        }if(fs.existsSync('public/img/promocoes/promocao2.png')){
-            var img2 = "promocao2.png";
-        }if(fs.existsSync('public/img/promocoes/promocao3.png')){
-            var img3 = "promocao3.png";
-        }if(fs.existsSync('public/img/promocoes/promocao4.png')){
-            var img4 = "promocao4.png";
-        }if(fs.existsSync('public/img/promocoes/promocao5.png')){
-            var img5 = "promocao5.png";
-        } else {
-            console.log('The file does not exist.');
-        }
-    } catch (err) {
-        console.error(err);
-    }
-    res.render("promocao/index", {
-        img1: img1,
-        img2: img2,
-        img3: img3,
-        img4: img4,
-        img5: img5
-    })
-    
-});
 
 router.get("/admin/noticias/new", (req, res) =>{
     res.render("admin/noticias/new")

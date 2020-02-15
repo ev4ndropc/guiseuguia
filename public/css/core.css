@@ -75,6 +75,9 @@ button.btn.btn-outline-danger{
     .max-min span{
         font-size: 18px;
     }
+    .first3, .second3 {
+        flex-direction: column;
+    }
 
     .container-imgs{
 	display:flex;
@@ -155,12 +158,22 @@ button.btn.btn-outline-danger{
 .container-imgs{
 	display:flex;
 	justify-content: space-around;
-	flex-direction:row;
+    flex-direction: column;
 }
 
+.container-imgs .btn-danger{
+    width:100%
+}
+.first3, 
+.second3{
+    display: flex;
+    justify-content: center;
+}
 
 .container-imgs img{
-	width:100%;
+    width:100%;
+    max-height: 350px!important;
+    min-height: 350px!important;
 
 }
 
@@ -168,6 +181,8 @@ button.btn.btn-outline-danger{
 .img2,
 .img3,
 .img4,
-.img5{
+.img5,
+.img6{
  width:33%;
+ padding: 3px;
 }

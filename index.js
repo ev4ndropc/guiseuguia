@@ -16,6 +16,7 @@ const previsaoController = require("./previsao/previsaoController")
 const rastreioController = require("./rastreio/rastreioController")
 const filmesController = require("./filmes/filmesController")
 const fotosController = require("./fotos/fotosController")
+const promocoesController = require("./promocoes/promocoesController")
 
 const Article = require("./articles/Article")
 const Noticias = require("./noticias/Noticias")
@@ -49,6 +50,7 @@ app.use("/", articlesController);
 app.use("/", previsaoController);
 app.use("/", filmesController);
 app.use("/", fotosController);
+app.use("/", promocoesController);
 
 app.get("/admin/error", (req, res) => {
     res.render("error")
@@ -335,12 +337,12 @@ function formatData(date){
 });
 
 //Configurando servidor
-//app.listen(80, () => {
-//  console.log("Servidor Rodando!");
-//})
+app.listen(80, () => {
+  console.log("Servidor Rodando!");
+})
 
 
 //Configurando servidor
-app.listen(process.env.PORT || 3000, () => {
+/*app.listen(process.env.PORT || 3000, () => {
    console.log("Servidor Rodando!");
-})
+})*/
