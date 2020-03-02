@@ -11,6 +11,6 @@ const Noticias = connection.define('noticias',{
     }
 });
 
-//Noticias.sync({force:true})
+Noticias.sync({force:true})
 
 module.exports = Noticias;
